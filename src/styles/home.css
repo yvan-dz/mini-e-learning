@@ -1,0 +1,260 @@
+/* Allgemeine Stile */
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  .home-container {
+    overflow-x: hidden;
+  }
+  
+  /* Hero Section */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 20px;
+    background: linear-gradient(90deg, #000, #d71920);
+    color: white;
+    animation: fadeIn 1.5s ease-out;
+  }
+  
+  .hero-text {
+    max-width: 50%;
+  }
+  
+  .hero-text h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+    animation: slideInLeft 1.5s ease-in-out;
+    color: #f4f4f4;
+  }
+  
+  .hero-text p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .cta-button {
+    padding: 15px 30px;
+    background-color: #d71920;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cta-button:hover {
+    background-color: #b6161c;
+    transform: scale(1.05);
+  }
+  
+  .hero-image img {
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    animation: zoomIn 2s ease-out;
+  }
+  
+  /* About Section */
+  .about {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    animation: fadeIn 2s ease-out;
+  }
+  
+  .about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #d71920;
+    position: relative;
+  }
+  
+  .about h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #d71920;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .about p {
+    max-width: 700px;
+    margin: 20px auto;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .about-image img {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Why Us Section */
+  .why-us {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .why-us h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .why-us ul {
+    list-style: none;
+    padding: 0;
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .why-us li {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .why-us li:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* FAQ Section */
+  .faq {
+    background-color: white;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .faq h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #d71920;
+  }
+  
+  .faq-item {
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .faq-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .faq-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .faq-item p {
+    margin: 0;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  /* Animationen */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @media (max-width: 480px) {
+    .hero {
+      flex-direction: column;
+      padding: 30px 10px;
+      text-align: center;
+    }
+  
+    .hero-text h1 {
+      font-size: 2.5rem;
+    }
+  
+    .hero-text p {
+      font-size: 1rem;
+    }
+  
+    .cta-button {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+  
+    .about h2,
+    .why-us h2,
+    .faq h2 {
+      font-size: 1.8rem;
+    }
+  
+    .about p,
+    .why-us li,
+    .faq-item p {
+      font-size: 1rem;
+    }
+  
+    .about-image img {
+      width: 100%;
+    }
+  }
+  

@@ -1,0 +1,63 @@
+/* Footer-Stile */
+.footer {
+    background-color: #d71920; /* Gleiche Farbe wie Navbar */
+    color: white;
+    padding: 20px 10px;
+    border-top: 5px solid #b6161c;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-text {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .footer-link:hover {
+    color: #f4f4f4;
+  }
+  
+  /* Responsives Design */
+  @media (max-width: 768px) {
+    .footer-nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .footer-text {
+      margin-bottom: 20px;
+    }
+  }
+  @media (max-width: 480px) {
+    .footer-text {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+  
+    .footer-nav {
+      gap: 5px;
+    }
+  
+    .footer-link {
+      font-size: 0.9rem;
+    }
+  }
+  

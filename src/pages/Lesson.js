@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../services/firebase";
-import { collection, query, where, getDocs, orderBy, addDoc, updateDoc, doc } from "firebase/firestore";
+import "../styles/lesson.module.css"; // Importiere das CSS für besseres Styling
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  addDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { auth } from "../services/firebase";
 
+
 const Lesson = () => {
-  const { courseId, lessonOrder } = useParams(); // Dynamische Parameter aus der URL
+  const { courseId, lessonOrder } = useParams();
   const navigate = useNavigate();
 
-  const [lesson, setLesson] = useState(null); // Aktuelle Lektion
-  const [lessons, setLessons] = useState([]); // Alle Lektionen im Kurs
-  const [loading, setLoading] = useState(true); // Ladezustand
-  const [completedLessons, setCompletedLessons] = useState([]); // Abgeschlossene Lektionen
+  const [lesson, setLesson] = useState(null);
+  const [lessons, setLessons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [completedLessons, setCompletedLessons] = useState([]);
 
   useEffect(() => {
-    // Lade Lektionen und Fortschritt
     const fetchLessonsAndProgress = async () => {
       try {
-        // Alle Lektionen für den Kurs abrufen
         const lessonsQuery = query(
           collection(db, "lessons"),
           where("courseId", "==", courseId),
@@ -30,13 +39,11 @@ const Lesson = () => {
         }));
         setLessons(lessonsData);
 
-        // Aktuelle Lektion finden
         const currentLesson = lessonsData.find(
           (lesson) => lesson.order === parseInt(lessonOrder)
         );
         setLesson(currentLesson);
 
-        // Fortschritt laden
         const progressQuery = query(
           collection(db, "progress"),
           where("userId", "==", auth.currentUser.uid),
@@ -57,7 +64,6 @@ const Lesson = () => {
     fetchLessonsAndProgress();
   }, [courseId, lessonOrder]);
 
-  // Lektion als abgeschlossen markieren
   const markLessonComplete = async () => {
     try {
       const progressQuery = query(
@@ -68,16 +74,14 @@ const Lesson = () => {
       const progressSnapshot = await getDocs(progressQuery);
 
       if (progressSnapshot.empty) {
-        // Neues Fortschrittsdokument erstellen
         await addDoc(collection(db, "progress"), {
           userId: auth.currentUser.uid,
           courseId,
           completedLessons: [lesson.order],
         });
       } else {
-        // Fortschritt aktualisieren
         const progressDoc = progressSnapshot.docs[0];
-        const updatedLessons = [...new Set([...completedLessons, lesson.order])]; // Duplikate vermeiden
+        const updatedLessons = [...new Set([...completedLessons, lesson.order])];
         await updateDoc(doc(db, "progress", progressDoc.id), {
           completedLessons: updatedLessons,
         });
@@ -90,17 +94,14 @@ const Lesson = () => {
     }
   };
 
-  // Ladezustand anzeigen
   if (loading) {
-    return <p>Lade Lektion...</p>;
+    return <p className="loading-text">Lade Lektion...</p>;
   }
 
-  // Fehlende Lektion behandeln
   if (!lesson) {
-    return <p>Lektion nicht gefunden.</p>;
+    return <p className="no-lesson-text">Lektion nicht gefunden.</p>;
   }
 
-  // Navigation: Nächste und vorherige Lektion
   const handleNext = () => {
     const nextLesson = lessons.find((l) => l.order === lesson.order + 1);
     if (nextLesson) {
@@ -116,25 +117,37 @@ const Lesson = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      {/* Lektionstitel und Inhalt */}
-      <h1>{lesson.title}</h1>
-      <p>{lesson.content}</p>
+    <div className="lesson-container">
+      <h1 className="lesson-title">{lesson.title}</h1>
+      <p className="lesson-content">{lesson.content}</p>
 
-      {/* Fortschrittsstatus */}
-      <div>
-        <p>Status: {completedLessons.includes(lesson.order) ? "Abgeschlossen" : "Noch nicht abgeschlossen"}</p>
+      <div className="lesson-status">
+        <p>
+          Status:{" "}
+          {completedLessons.includes(lesson.order)
+            ? "Abgeschlossen"
+            : "Noch nicht abgeschlossen"}
+        </p>
         {!completedLessons.includes(lesson.order) && (
-          <button onClick={markLessonComplete}>Als abgeschlossen markieren</button>
+          <button className="mark-complete-button" onClick={markLessonComplete}>
+            Als abgeschlossen markieren
+          </button>
         )}
       </div>
 
-      {/* Navigation */}
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={handlePrevious} disabled={lesson.order === 1}>
+      <div className="lesson-navigation">
+        <button
+          className="nav-button"
+          onClick={handlePrevious}
+          disabled={lesson.order === 1}
+        >
           Vorherige Lektion
         </button>
-        <button onClick={handleNext} disabled={lesson.order === lessons.length}>
+        <button
+          className="nav-button"
+          onClick={handleNext}
+          disabled={lesson.order === lessons.length}
+        >
           Nächste Lektion
         </button>
       </div>

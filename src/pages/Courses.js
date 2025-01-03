@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../services/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import "../styles/courses.css"; // CSS importieren
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -24,39 +25,17 @@ const Courses = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="courses-container">
       <h1>Kurse</h1>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <div className="courses-grid">
         {courses.length > 0 ? (
           courses.map((course) => (
-            <div
-              key={course.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "10px",
-                width: "200px",
-                textAlign: "center",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <img
-                src={course.image}
-                alt={course.title}
-                style={{ width: "100%", borderRadius: "5px" }}
-              />
-              <h3>{course.title}</h3>
-              <p>{course.description}</p>
-              <Link
-                to={`/courses/${course.id}`}
-                style={{
-                  color: "blue",
-                  textDecoration: "none",
-                  marginTop: "10px",
-                  display: "inline-block",
-                }}
-              >
-                Mehr erfahren
+            <div key={course.id} className="course-card">
+              <img src={course.image} alt={course.title} className="course-image" />
+              <h3 className="course-title">{course.title}</h3>
+              <p className="course-description">{course.description}</p>
+              <Link to={`/courses/${course.id}`} className="course-link">
+                Zu den Lektionen
               </Link>
             </div>
           ))

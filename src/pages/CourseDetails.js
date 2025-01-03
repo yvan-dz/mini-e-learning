@@ -1,44 +1,96 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { db } from "../services/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy, doc, getDoc } from "firebase/firestore";
+import "../styles/courseDetails.css"; // CSS importieren
 
 const CourseDetails = () => {
-  const { id } = useParams();
-  const [course, setCourse] = useState(null);
+  const { id: courseId } = useParams();
+  const navigate = useNavigate();
+  const [lessons, setLessons] = useState([]);
+  const [courseTitle, setCourseTitle] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchCourseDetails = async () => {
       try {
-        const docRef = doc(db, "courses", id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setCourse(docSnap.data());
+        // Abrufen des spezifischen Kursdokuments
+        const courseDocRef = doc(db, "courses", courseId);
+        const courseDoc = await getDoc(courseDocRef);
+
+        if (courseDoc.exists()) {
+          const courseData = courseDoc.data();
+          setCourseTitle(courseData.title || "Kein Titel verfügbar");
+          setCourseDescription(courseData.description || "Keine Beschreibung verfügbar");
         } else {
-          console.log("Kein Kurs gefunden!");
+          console.error("Der Kurs wurde nicht gefunden.");
         }
+
+        // Abrufen der Lektionen
+        const lessonsQuery = query(
+          collection(db, "lessons"),
+          where("courseId", "==", courseId),
+          orderBy("order")
+        );
+        const lessonsSnapshot = await getDocs(lessonsQuery);
+        const lessonsData = lessonsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setLessons(lessonsData);
       } catch (error) {
-        console.error("Fehler beim Abrufen des Kurses:", error);
+        console.error("Fehler beim Abrufen der Kursdetails:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchCourse();
-  }, [id]);
+    fetchCourseDetails();
+  }, [courseId]);
 
-  if (!course) {
-    return <p>Lade Kursdetails...</p>;
+  if (loading) {
+    return <p className="loading-text">Lade Kursdetails...</p>;
+  }
+
+  if (!courseTitle && !courseDescription) {
+    return <p className="no-course-text">Kursinformationen konnten nicht geladen werden.</p>;
+  }
+
+  if (lessons.length === 0) {
+    return <p className="no-lessons-text">Keine Lektionen für diesen Kurs gefunden.</p>;
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>{course.title}</h1>
-      <img
-        src={course.image}
-        alt={course.title}
-        style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }}
-      />
-      <p>{course.description}</p>
-      {/* Platz für weitere Inhalte wie Lektionen oder Quiz */}
+    <div className="course-details-container">
+      <h1 className="course-title">Kursdetails: {courseTitle}</h1>
+
+      {/* Kursbeschreibung */}
+      <p className="course-description">{courseDescription}</p>
+
+      {/* Liste der Lektionen */}
+      <ul className="lesson-list">
+        {lessons.map((lesson) => (
+          <li key={lesson.id} className="lesson-item">
+            <span className="lesson-title">
+              {lesson.order}. {lesson.title}
+            </span>
+            <Link to={`/courses/${courseId}/lessons/${lesson.order}`} className="lesson-link">
+              Zur Lektion
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      {/* Buttons */}
+      <div className="button-group">
+        <button className="back-button" onClick={() => navigate("/courses")}>
+          Zurück zur Kursübersicht
+        </button>
+        <button className="start-button" onClick={() => navigate(`/courses/${courseId}/lessons/1`)}>
+          Kurs starten
+        </button>
+      </div>
     </div>
   );
 };

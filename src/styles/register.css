@@ -1,0 +1,108 @@
+/* Container */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f6f6f6, #d71920);
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Form */
+  .register-form {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .register-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #d71920;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .register-input:focus {
+    border-color: #d71920;
+  }
+  
+  .register-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #d71920;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .register-button:hover {
+    background-color: #a61414;
+  }
+  
+  .register-error {
+    margin-top: 15px;
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .register-form {
+      padding: 20px 15px;
+    }
+  
+    .register-title {
+      font-size: 1.8rem;
+    }
+  
+    .register-input {
+      font-size: 0.9rem;
+    }
+  
+    .register-button {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .register-form {
+      padding: 15px;
+    }
+  
+    .register-title {
+      font-size: 1.8rem;
+    }
+  
+    .register-input {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  
+    .register-button {
+      font-size: 1rem;
+      padding: 12px;
+    }
+  
+    .login-text {
+      font-size: 0.85rem;
+    }
+  }
+  

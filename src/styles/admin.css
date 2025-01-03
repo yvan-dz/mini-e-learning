@@ -1,0 +1,178 @@
+/* Allgemeine Container-Stile */
+.admin-container {
+    padding: 40px;
+    background-color: #f9f9f9;
+    font-family: "Roboto", sans-serif;
+    color: #333;
+  }
+  
+  .admin-container h1,
+  .admin-container h3 {
+    text-align: center;
+    color: #d71920;
+    margin-bottom: 30px;
+  }
+  
+  .admin-container h3 {
+    position: relative;
+  }
+  
+  .admin-container h3::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #d71920;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  /* Formulare */
+  .admin-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  
+  .admin-form input,
+  .admin-form select,
+  .admin-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .admin-form input:focus,
+  .admin-form select:focus,
+  .admin-form textarea:focus {
+    border-color: #d71920;
+  }
+  
+  .admin-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #d71920;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-form button:hover {
+    background-color: #b6161c;
+  }
+  
+  /* Kurse anzeigen */
+  .courses-list {
+    margin-top: 30px;
+  }
+  
+  .course-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .course-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .course-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .course-card button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .course-card button:first-of-type {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .course-card button:first-of-type:hover {
+    background-color: #0056b3;
+  }
+  
+  .course-card button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .course-card button:last-of-type:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-form {
+      padding: 15px;
+    }
+  
+    .course-card {
+      padding: 15px;
+    }
+  }
+  @media (max-width: 480px) {
+    .admin-container {
+      padding: 20px;
+    }
+  
+    .admin-form {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .admin-form button {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .course-card {
+      padding: 10px;
+    }
+  
+    .course-card h4 {
+      font-size: 1.2rem;
+    }
+  
+    .course-card p {
+      font-size: 0.9rem;
+    }
+  
+    .course-card button {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+  }
+  

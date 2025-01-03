@@ -1,0 +1,102 @@
+/* Allgemeine Container-Stile */
+.courses-container {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .courses-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #d71920;
+  }
+  
+  .courses-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Karten-Stil */
+  .course-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .course-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .course-title {
+    font-size: 1.5rem;
+    margin: 15px;
+    color: #333;
+  }
+  
+  .course-description {
+    font-size: 1rem;
+    margin: 0 15px 15px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .course-link {
+    display: block;
+    background-color: #d71920;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 15px 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .course-link:hover {
+    background-color: #b6161c;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .course-card {
+      width: 100%;
+    }
+  
+    .course-image {
+      height: 150px;
+    }
+  }
+  @media (max-width: 480px) {
+    .course-card {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .course-title {
+      font-size: 1.2rem;
+    }
+  
+    .course-description {
+      font-size: 0.9rem;
+    }
+  
+    .course-link {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  }
+  
